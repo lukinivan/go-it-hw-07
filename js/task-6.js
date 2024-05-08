@@ -7,23 +7,26 @@ createBtnEl.addEventListener('click', handleCreate);
 destroyBtnEl.addEventListener('click', handleDestroy);
 
 function createBoxes(amount) {
-  let markup = '';
   let count = 30;
-  let color = '';
+  let markup = '';
+  let color = getRandomHexColor();
 
   for (let i = 0; i < amount; i++) {
-    color = getRandomHexColor();
-    count += 10;
     markup += `<div id="box" 
     style="width:${count}px; height:${count}px; background-color:${color}"
     ></div>`;
+
+    color = getRandomHexColor();
+    count += 10;
   }
+
   boxesEl.innerHTML = markup;
 }
 
 function handleCreate() {
-  boxesEl.innerHTML = '';
   const amount = Number(inputNumEl.value);
+  inputNumEl.value = '';
+
   amount > 0 && amount <= 100
     ? createBoxes(amount)
     : alert('Please enter a number between 1 and 100.');
